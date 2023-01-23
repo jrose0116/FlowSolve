@@ -2,8 +2,7 @@
 
 Naive bruteforce solver for Flow puzzles. Locally hosted and ran on Electron Desktop Application.
 
-[Screenshot](src/SS1.png)
-
+![Screenshot](src/SS1.png)
 ## Tech Used
 
 **Client:** HTML, JavaScript, CSS
