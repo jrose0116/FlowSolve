@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <div id="inputs">
+            <label for="wid">Width:</label> <input type="number" id="wid" name="wid" value="3"/>
+            <label for="hei">Height:</label> <input type="number" id="hei" name="hei" value="3"/>
+            <input class="button" type="button" value="Set Blank Table" id="updateDim"/>
+        </div>
+
+        <table id="flTable"></table>
+
+        <div id="colors">
+            <span class="color circ active" id="Red" style="background-color: #9e2b27"></span>
+            <span class="color circ" id="Orange" style="background-color: #ea7e35"></span>
+            <span class="color circ" id="Yellow" style="background-color: #c2b51c"></span>
+            <span class="color circ" id="Green" style="background-color: #364b18 "></span>
+            <span class="color circ" id="Lime" style="background-color: #39ba2e"></span>
+            <span class="color circ" id="Blue" style="background-color: #0000AA"></span>
+            <span class="color circ" id="Cyan" style="background-color: #267191"></span>
+            <span class="color circ" id="LightBlue" style="background-color: #6387d2"></span>
+            <span class="color circ" id="Purple" style="background-color: #7e34bf"></span>
+            <span class="color circ" id="Magenta" style="background-color: #be49c9"></span>
+            <span class="color circ" id="Pink" style="background-color: #d98199"></span>
+            <span class="color circ" id="Brown" style="background-color: #56331c"></span>
+            <span class="color circ" id="White" style="background-color: #e4e4e4"></span>
+            <span class="color circ" id="Gray" style="background-color: #a0a7a7"></span>
+            <span class="color circ" id="DarkGray" style="background-color: #414141"></span>
+            <span class="color circ" id="Black" style="background-color: #181414"></span>
+        </div>
+        <div id="solveDiv">
+            <input class="button center" type="button" value="Solve" id="solve"/>
+        </div>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="index.js"></script>
+</html>

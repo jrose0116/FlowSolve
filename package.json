@@ -1,0 +1,14 @@
+{
+  "name": "FlowSolve",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Jacob Rose",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^22.0.3"
+  }
+}
