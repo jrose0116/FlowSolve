@@ -82,12 +82,10 @@ function buildBlankTable() {
 buildBlankTable()
 
 function makeTableElement(sub, i){
-    if(sub == 1){
-        let elem = document.createElement('span')
-        elem.classList.add(sub == 1 ? "leftcorn" : sub == -1 ? "rightcorn" : sub == width ? "upcorn" : "downcorn")
-        elem.style.backgroundColor = colors[usedColors[i]]
-        return elem
-    }
+    let elem = document.createElement('span')
+    elem.classList.add(sub == 1 ? "leftcorn" : sub == -1 ? "rightcorn" : sub == width ? "upcorn" : "downcorn")
+    elem.style.backgroundColor = colors[usedColors[i]]
+    return elem
 }
 
 function buildTable(solution) {
@@ -104,77 +102,23 @@ function buildTable(solution) {
                 else{
                     if(solution[i][j]-solution[i][j+1] == width){
                         if(j==1){
-                            if(solution[i][j-1]-solution[i][j] == -width){
-                                let elem = document.createElement('span')
-                                elem.classList.add("upcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("downcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
-                            else if(solution[i][j-1]-solution[i][j] == 1){
-                                let elem = document.createElement('span')
-                                elem.classList.add("upcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("rightcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
-                            else {
-                                let elem = document.createElement('span')
-                                elem.classList.add("upcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("leftcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
+                            let elem = makeTableElement(solution[i][j]-solution[i][j+1], i)
+                            let elem2 = makeTableElement(solution[i][j]-solution[i][j-1], i)
+                            $("#" + solution[i][j]).html(elem).append(elem2) 
                         }
                         else{
-                            let elem = document.createElement('span')
-                            elem.classList.add("upcorn")
-                            elem.style.backgroundColor = colors[usedColors[i]]
-                            
+                            let elem = makeTableElement(solution[i][j]-solution[i][j+1], i)
                             $("#" + solution[i][j]).html(elem)
                         }
                     }
                     else{
                         if(j==1){
-                            if(solution[i][j-1]-solution[i][j] == width){
-                                let elem = document.createElement('span')
-                                elem.classList.add("downcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("upcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
-                            else if(solution[i][j-1]-solution[i][j] == 1){
-                                let elem = document.createElement('span')
-                                elem.classList.add("downcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("rightcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
-                            else {
-                                let elem = document.createElement('span')
-                                elem.classList.add("downcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("leftcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
+                            let elem = makeTableElement(solution[i][j]-solution[i][j+1], i)
+                            let elem2 = makeTableElement(solution[i][j]-solution[i][j-1], i)
+                            $("#" + solution[i][j]).html(elem).append(elem2) 
                         }
                         else {
-                            let elem = document.createElement('span')
-                            elem.classList.add("downcorn")
-                            elem.style.backgroundColor = colors[usedColors[i]]
-                            
+                            let elem = makeTableElement(solution[i][j]-solution[i][j+1], i)
                             $("#" + solution[i][j]).html(elem)
                         }
                     }
@@ -190,75 +134,23 @@ function buildTable(solution) {
                 else{
                     if((solution[i][j]-solution[i][j+1]) == 1){
                         if(j==1){
-                            if(solution[i][j-1]-solution[i][j] == 1){
-                                let elem = document.createElement('span')
-                                elem.classList.add("leftcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("rightcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
-                            else if(solution[i][j-1]-solution[i][j] == width){
-                                let elem = document.createElement('span')
-                                elem.classList.add("leftcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("downcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
-                            else {
-                                let elem = document.createElement('span')
-                                elem.classList.add("leftcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("upcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
+                            let elem = makeTableElement(solution[i][j]-solution[i][j+1], i)
+                            let elem2 = makeTableElement(solution[i][j]-solution[i][j-1], i)
+                            $("#" + solution[i][j]).html(elem).append(elem2) 
                         }
                         else{
-                            let elem = document.createElement('span')
-                            elem.classList.add("leftcorn")
-                            elem.style.backgroundColor = colors[usedColors[i]]
+                            let elem = makeTableElement(solution[i][j]-solution[i][j+1], i)
                             $("#" + solution[i][j]).html(elem)
                         }
                     }
                     else{
                         if(j==1){
-                            if(solution[i][j-1]-solution[i][j] == -1){
-                                let elem = document.createElement('span')
-                                elem.classList.add("rightcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("leftcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
-                            else if(solution[i][j-1]-solution[i][j] == width){
-                                let elem = document.createElement('span')
-                                elem.classList.add("rightcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("downcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
-                            else {
-                                let elem = document.createElement('span')
-                                elem.classList.add("rightcorn")
-                                elem.style.backgroundColor = colors[usedColors[i]]
-                                let elem2 = document.createElement('span')
-                                elem2.classList.add("upcorn")
-                                elem2.style.backgroundColor = colors[usedColors[i]]
-                                $("#" + solution[i][j]).html(elem).append(elem2) 
-                            }
+                            let elem = makeTableElement(solution[i][j]-solution[i][j+1], i)
+                            let elem2 = makeTableElement(solution[i][j]-solution[i][j-1], i)
+                            $("#" + solution[i][j]).html(elem).append(elem2) 
                         }
                         else{
-                            let elem = document.createElement('span')
-                            elem.classList.add("rightcorn")
-                            elem.style.backgroundColor = colors[usedColors[i]]
+                            let elem = makeTableElement(solution[i][j]-solution[i][j+1], i)
                             $("#" + solution[i][j]).html(elem)
                         }
                     }
@@ -279,18 +171,23 @@ $(".color").on('click', function(event) {
 })
 
 $("#solve").on('click', function() {
+    let solution = []
     let paths = []
     for(let i = 0; i < usedColors.length; i++){
         [pos1, pos2] = findEndpoints(usedColors[i])
         let path = findPaths(pos1,pos2)
         if(path.length == 0){
-            alert("No answer")
+            alert("No Solution")
             return;
         }
         paths.push(path);
     }
     console.log(paths)
-    let solution = findCombination(paths, width*height)
+    solution = findCombination(paths, width*height)
+    if(flatEquals(solution, [])){
+        alert("No Solution")
+        return;
+    }
     console.log(solution)
     buildTable(solution)
 })
@@ -338,37 +235,6 @@ const findCombination = (possibilities, length) => {    // Function by Xaridar (
     }
     return [];
 };
-
-
-// function findCombination(arrays, y) {
-//     let validCombination = []
-//     for (let i = 0; i < arrays.length; i++) {
-//       for (let j = 0; j < arrays[i].length; j++) {
-//         let combination = []
-//         combination.push(arrays[i][j])
-//         let isValid = true
-//         for (let k = 0; k < combination.length; k++) {
-//           for (let l = 0; l < combination[k].length; l++) {
-//             if (combination[k][l] < 0 || combination[k][l] >= y) {
-//               isValid = false;
-//               break;
-//             }
-//           }
-//           // check for unique numbers
-//           let uniqueNumbers = new Set(combination[k])
-//           if (uniqueNumbers.size !== combination[k].length) {
-//             isValid = false;
-//             break;
-//           }
-//         }
-//         if (isValid) {
-//           validCombination.push(combination[0])
-//           break
-//         }
-//       }
-//     }
-//     return validCombination.length === arrays.length ? validCombination : []
-// }
 
 
 function findPaths(pos1, pos2) {
