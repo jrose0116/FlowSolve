@@ -187,7 +187,7 @@ $("#solve").on('click', function() {
     }
     console.log("Paths", paths, Date.now()-start,"ms")
     start = Date.now()
-    paths = deleteUnusablePaths(paths, width*height)
+    paths = deleteUnusablePaths(paths, width*height, [...paths].flat().length)
     console.log("Minimize", paths, Date.now()-start,"ms")
     start = Date.now()
     solution = findCombination(paths, width*height)
@@ -221,38 +221,52 @@ function findEndpoints(color){
     return [pos1, pos2]
 }
 
-function deleteUnusablePaths(paths, length){
+function deleteUnusablePaths(paths, length, pathslength){
+    let deletearr = []
     for(let i = 0; i < paths.length; i++){
-        // console.log("Checking:", usedColors[i])
+        // console.log("Checking:", usedColors[i], paths)
         for(let j = 0; j < length; j++){
             // console.log("Checking", j)
             let allContains = true
             for(let k = 0; k < paths[i].length;k++){
                 // console.log("Checkin", paths[i][k])
-                if(!paths[i][k].includes(j)) {
+                if(!paths[i][k].includes(j, 1)) {
                     // console.log(j, "not in", paths[i][k])
                     allContains = false
                     break;
                 }
             }
             if(allContains){
-                deleteFromPathsExceptI(paths, j, i, length)
+                deletearr.push([j, i])
             }
         }
+    }
+    for(let i = 0; i < deletearr.length; i++){
+        paths = deleteFromPathsExceptI(paths, deletearr[i][0], deletearr[i][1])
+    }
+    if(pathslength != [...paths].flat().length){
+        deleteUnusablePaths(paths, length, [...paths].flat().length)
     }
     return paths
 }
 
-function deleteFromPathsExceptI(paths, x, excepti, length) {
-    console.log("DeletefromI",x,excepti,paths)
+function deleteFromPathsExceptI(paths, x, excepti) {
+    // console.log("DeletefromI",x,excepti,paths)
     for(let i = 0; i < paths.length; i++){
-        if(i == excepti)
-        for(let j of paths[i]){
-            if(j.includes(x)){
-                delete j;
+        
+        if(i == excepti){
+            continue;
+        }
+        // console.log("Delete", x, "from:", usedColors[i])
+        for(let j = paths[i].length - 1; j >= 0; j--){
+            if(paths[i][j]?.includes(x)){
+                paths[i].splice(j,1);
+                j++;
             }
         }
     }
+    // console.log(x, "from not", usedColors[excepti], [...paths])
+    return paths
 }
 
 const findCombination = (possibilities, length) => {    // Function by Xaridar ()
@@ -293,7 +307,7 @@ function findPaths(pos1, pos2) {
         if(!(row*height + col == pos2 || row*height + col == pos1)){
             return
         }
-        if((row*height + col == pos2)&&(path.length<=2)){
+        if((row*height + col == pos2)&&(path.length==1)){
             return
         }
       }
