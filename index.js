@@ -176,7 +176,7 @@ $("#solve").on('click', function() {
     let start = Date.now()
     for(let i = 0; i < usedColors.length; i++){
         [pos1, pos2] = findEndpoints(usedColors[i])
-        let path = findPaths(pos1,pos2)
+        let path = findPaths(pos1,pos2, usedColors[i])
         if(path.length == 0){
             alert("No Solution")
             console.log("Found No Solution After ", Date.now()-start,"ms")
@@ -253,7 +253,6 @@ function deleteUnusablePaths(paths, length, pathslength){
 function deleteFromPathsExceptI(paths, x, excepti) {
     // console.log("DeletefromI",x,excepti,paths)
     for(let i = 0; i < paths.length; i++){
-        
         if(i == excepti){
             continue;
         }
@@ -294,39 +293,31 @@ const findCombination = (possibilities, length) => {    // Function by Xaridar (
 };
 
 
-function findPaths(pos1, pos2) {
+function findPaths(pos1, pos2, color) {
     let paths = [];
     const [row1, col1] = toXY(pos1);
     const [row2, col2] = toXY(pos2);
     
     function dfs(row, col, path) {
-      if (row < 0 || row >= height || col < 0 || col >= width || path.includes(row*width + col) || table[row][col] != "_") {
-        if(row*height + col == pos1 && path.includes(row*height + col)) {
-            return
-        }
-        if(!(row*height + col == pos2 || row*height + col == pos1)){
-            return
-        }
-        if((row*height + col == pos2)&&(path.length==1)){
-            return
-        }
+      if (path.includes(row*width + col) || (table[row][col] != "_" && table[row][col] != color)) {
+        return
       }
       path.push(row*width + col);
       
       if (row === row2 && col === col2 && path.length != 2) {
-        for(const i of paths) {
-            if(i.length == path.length){
-                if(flatEquals(i, path)){
-                    return
-                }
-            }
-        }
+        // for(const i of paths) {
+        //     if(i.length == path.length){
+        //         if(flatEquals(i, path)){
+        //             return
+        //         }
+        //     }
+        // }
         paths.push(path);
       } else {
-        dfs(row - 1, col, [...path]);
-        dfs(row + 1, col, [...path]);
-        dfs(row, col - 1, [...path]);
-        dfs(row, col + 1, [...path]);
+        if(row != 0) { dfs(row - 1, col, [...path]); }
+        if(row != height-1) { dfs(row + 1, col, [...path]); }
+        if(col != 0) { dfs(row, col - 1, [...path]); }
+        if(col != width-1) { dfs(row, col + 1, [...path]); }
       }
     }
     
